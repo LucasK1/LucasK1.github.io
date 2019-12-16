@@ -237,15 +237,15 @@ function update(time = 0) {
 }
 
 function updateLevel() {
-  document.getElementById('level').innerText = `Level: ${player.level}`;
+  document.getElementById('level').innerText = `LEWER: ${player.level}`;
 }
 
 function updateNumberOfLines() {
-  document.getElementById('number-of-lines').innerText = `Lines: ${player.lines}`;
+  document.getElementById('number-of-lines').innerText = `LINIJE: ${player.lines}`;
 }
 
 function updateScore() {
-  document.getElementById('score').innerText = `Score: ${player.score}`;
+  document.getElementById('score').innerText = `PÓNKTY: ${player.score}`;
 }
 
 const colors = [

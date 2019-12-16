@@ -1,26 +1,52 @@
 body {
   background-image: url('images/tetris_0.jpg');
-  color: #fff;
+  color: violet;
   font-family: sans-serif;
   font-size: 2em;
   text-align: center;
 }
 canvas {
-  border: solid .2em #fff;
+  border: solid .2em darkgoldenrod;
   height: 90vh;
 }
+
+h1 {
+  font-size: 2em;
+  color: darkgoldenrod;
+}
+
 .numbers {
   height: 5vh;
-}
-#score, #number-of-lines, #level {
-  border: solid .1em #fff;
-  padding: .2em;
-  margin: .1em;
 }
 
 .game, .start, .game-over {
   display: none;
 }
+
 .active {
   display: block;
+}
+
+#score, #number-of-lines, #level {
+  border: solid .1em darkgoldenrod;
+  padding: .2em;
+  margin: .1em;
+}
+
+#level-choice {
+  background-color: blue;
+  color: yellow;
+  border: none;
+  font-size: 1.2em;
+  width: 47vh;
+  padding-left: 5px;
+}
+
+#start-btn, #restart-btn {
+  background-color: red;
+  font-family: inherit;
+  font-size: 1.2em;
+  border: none;
+  border-radius: 2%;
+  padding: 3px 5px;
 }
