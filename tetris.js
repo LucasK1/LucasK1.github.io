@@ -241,7 +241,8 @@ function showStartScreen() {
   document.querySelector('.start').classList.add('active');
 }
 
-function startGame() {
+function startGame(e) {
+  e.preventDefault();
   setLevel();
   if (player.level >= 1 && player.level <= 30) {
     gameState = 'game';
@@ -320,7 +321,7 @@ document.addEventListener('keydown', event => {
   }
 });
 
-document.getElementById('start-btn').addEventListener('click', startGame);
+document.getElementById('start-form').addEventListener('submit', startGame);
 document.getElementById('restart-btn').addEventListener('click', showStartScreen);
 
 

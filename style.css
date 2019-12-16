@@ -27,7 +27,7 @@ h1 {
   display: block;
 }
 
-.controls {
+.controls, .levels {
   color: yellow;
 }
 
