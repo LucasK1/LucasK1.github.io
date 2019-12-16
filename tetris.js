@@ -121,7 +121,7 @@ function drawMatrix(matrix, offset) {
 }
 
 function increaseLevel() {
-  if (player.score % 20 === 0) {
+  if (player.score % 100 === 0) {
     dropInterval /= 2;
     player.level++;
   }
@@ -167,8 +167,12 @@ function playerReset() {
   if (collide(arena, player)) {
     arena.forEach(row => row.fill(0));
     player.score = 0;
+    player.lines = 0;
+    player.level = 1;
+    dropInterval = 1000;
     updateScore();
     updateNumberOfLines();
+    updateLevel();
   }
 }
 
