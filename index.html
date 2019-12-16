@@ -14,10 +14,22 @@
       border: solid .2em #fff;
       height: 90vh;
     }
+    div {
+      height: 5vh;
+    }
+    span {
+      border: solid .1em #fff;
+      padding: 5px;
+      margin: 2px;
+    }
   </style>
 </head>
 <body>
-  <div id="score"></div>
+  <div>
+    <span id="score"></span>
+    <span id="number-of-lines"></span>
+    <span id="level"></span>
+  </div>
   <canvas id="tetris" width="240" height="400"></canvas>
   <script src="tetris.js"></script>
   <embed src="./Tetris.ogg" autostart="true" loop="true"

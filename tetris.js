@@ -1,6 +1,11 @@
 const canvas = document.getElementById('tetris');
 const context = canvas.getContext('2d');
 
+let dropCounter = 0;
+let dropInterval = 1000;
+
+let lastTime = 0;
+
 context.scale(20, 20);
 
 function arenaSweep() {
@@ -17,7 +22,12 @@ function arenaSweep() {
 
     player.score += rowCount * 10;
     rowCount *= 2;
+
+    player.lines++;
+
+    increaseLevel();
   }
+
 }
 
 function collide(arena, player) {
@@ -110,6 +120,13 @@ function drawMatrix(matrix, offset) {
   });
 }
 
+function increaseLevel() {
+  if (player.score % 20 === 0) {
+    dropInterval /= 2;
+    player.level++;
+  }
+}
+
 function merge(arena, player) {
   player.matrix.forEach((row, y) => {
     row.forEach((value, x) => {
@@ -128,6 +145,8 @@ function playerDrop() {
     playerReset();
     arenaSweep();
     updateScore();
+    updateNumberOfLines();
+    updateLevel();
   }
   dropCounter = 0;
 }
@@ -149,6 +168,7 @@ function playerReset() {
     arena.forEach(row => row.fill(0));
     player.score = 0;
     updateScore();
+    updateNumberOfLines();
   }
 }
 
@@ -187,10 +207,7 @@ function rotate(matrix, dir) {
   }
 }
 
-let dropCounter = 0;
-let dropInterval = 1000;
 
-let lastTime = 0;
 
 function update(time = 0) {
   const deltaTime = time - lastTime;
@@ -205,8 +222,16 @@ function update(time = 0) {
   requestAnimationFrame(update);
 }
 
+function updateLevel() {
+  document.getElementById('level').innerText = `Level: ${player.level}`;
+}
+
+function updateNumberOfLines() {
+  document.getElementById('number-of-lines').innerText = `Lines: ${player.lines}`;
+}
+
 function updateScore() {
-  document.getElementById('score').innerText = player.score;
+  document.getElementById('score').innerText = `Score: ${player.score}`;
 }
 
 const colors = [
@@ -226,6 +251,8 @@ const player = {
   pos: {x: 0, y: 0},
   matrix: null,
   score: 0,
+  lines: 0,
+  level: 1,
 }
 
 document.addEventListener('keydown', event => {
@@ -243,5 +270,7 @@ document.addEventListener('keydown', event => {
 });
 
 playerReset();
+updateNumberOfLines();
 updateScore();
+updateLevel();
 update();
