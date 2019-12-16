@@ -311,15 +311,19 @@ function setLevel() {
 }
 
 function startGame() {
+  setLevel();
+  if (player.level >= 1 && player.level < 20) {
   gameState = 'game';
   document.querySelector('.start').classList.remove('active');
   document.querySelector('.game').classList.add('active');
-  setLevel();
   playerReset();
   updateNumberOfLines();
   updateScore();
   updateLevel();
   update();
+  } else {
+    alert('O JERONIE! COŚ TY ZA LICZBĘ WYMODZIŁ?!');
+  }
 }
 
 showStartScreen();
