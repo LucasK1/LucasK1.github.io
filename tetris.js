@@ -217,7 +217,45 @@ function rotate(matrix, dir) {
   }
 }
 
+function setLevel() {
+  player.level = document.getElementById('level-choice').value;
+  if (player.level === 1) {
+    return;
+  } else {
+    dropInterval = 1000 / (player.level)
+  }
+}
 
+function showGameOverScreen() {
+  if (gameState !== 'gameOver') {
+    return;
+  } else {
+    gameState = 'game-over'
+    document.querySelector('.game').classList.remove('active');
+    document.querySelector('.game-over').classList.add('active');
+  }
+}
+
+function showStartScreen() {
+  document.querySelector('.game-over').classList.remove('active');
+  document.querySelector('.start').classList.add('active');
+}
+
+function startGame() {
+  setLevel();
+  if (player.level >= 1 && player.level <= 30) {
+    gameState = 'game';
+    document.querySelector('.start').classList.remove('active');
+    document.querySelector('.game').classList.add('active');
+    playerReset();
+    updateNumberOfLines();
+    updateScore();
+    updateLevel();
+    update();
+  } else {
+    alert('O JERONIE! COŚ TY ZA LICZBĘ WYMODZIŁ?!');
+  }
+}
 
 function update(time = 0) {
   if (gameState !== 'game') {
@@ -230,7 +268,6 @@ function update(time = 0) {
     if (dropCounter > dropInterval) {
       playerDrop();
     }
-
     draw();
     requestAnimationFrame(update);
   }
@@ -286,44 +323,6 @@ document.addEventListener('keydown', event => {
 document.getElementById('start-btn').addEventListener('click', startGame);
 document.getElementById('restart-btn').addEventListener('click', showStartScreen);
 
-function showStartScreen() {
-    document.querySelector('.game-over').classList.remove('active');
-    document.querySelector('.start').classList.add('active');
-}
 
-function showGameOverScreen() {
-  if (gameState !== 'gameOver') {
-    return;
-  } else {
-    gameState = 'game-over'
-    document.querySelector('.game').classList.remove('active');
-    document.querySelector('.game-over').classList.add('active');
-  }
-}
-
-function setLevel() {
-  player.level = document.getElementById('level-choice').value;
-  if (player.level === 1) {
-    return;
-  } else {
-    dropInterval = 1000 / (player.level)
-  }
-}
-
-function startGame() {
-  setLevel();
-  if (player.level >= 1 && player.level < 20) {
-  gameState = 'game';
-  document.querySelector('.start').classList.remove('active');
-  document.querySelector('.game').classList.add('active');
-  playerReset();
-  updateNumberOfLines();
-  updateScore();
-  updateLevel();
-  update();
-  } else {
-    alert('O JERONIE! COŚ TY ZA LICZBĘ WYMODZIŁ?!');
-  }
-}
 
 showStartScreen();
