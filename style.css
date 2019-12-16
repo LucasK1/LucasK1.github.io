@@ -27,6 +27,10 @@ h1 {
   display: block;
 }
 
+.controls {
+  color: yellow;
+}
+
 #score, #number-of-lines, #level {
   border: solid .1em darkgoldenrod;
   padding: .2em;
