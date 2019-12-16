@@ -6,6 +6,8 @@ let dropInterval = 1000;
 
 let lastTime = 0;
 
+let scoreCounter = 0;
+
 context.scale(20, 20);
 
 function arenaSweep() {
@@ -21,11 +23,10 @@ function arenaSweep() {
     ++y;
 
     player.score += rowCount * 10;
+    scoreCounter += rowCount * 10;
     rowCount *= 2;
 
     player.lines++;
-
-    increaseLevel();
   }
 
 }
@@ -121,9 +122,10 @@ function drawMatrix(matrix, offset) {
 }
 
 function increaseLevel() {
-  if (player.score % 100 === 0) {
+  if (scoreCounter === 100) {
     dropInterval /= 2;
     player.level++;
+    scoreCounter = 0;
   }
 }
 
@@ -144,6 +146,7 @@ function playerDrop() {
     merge(arena, player);
     playerReset();
     arenaSweep();
+    increaseLevel();
     updateScore();
     updateNumberOfLines();
     updateLevel();
