@@ -2,35 +2,26 @@
 <html>
 <head>
   <title>Tetris</title>
-  <style>
-    body {
-      background-image: url('images/tetris_0.jpg');
-      color: #fff;
-      font-family: sans-serif;
-      font-size: 2em;
-      text-align: center;
-    }
-    canvas {
-      border: solid .2em #fff;
-      height: 90vh;
-    }
-    div {
-      height: 5vh;
-    }
-    span {
-      border: solid .1em #fff;
-      padding: .2em;
-      margin: .1em;
-    }
-  </style>
+  <link rel="stylesheet" href="style.css">
 </head>
 <body>
-  <div>
-    <span id="score"></span>
-    <span id="number-of-lines"></span>
-    <span id="level"></span>
+  <div class="start">
+    <h1>ŁUKASZ & ŁUKASZ INKOPERYJD PRZEDSTAWIA: TETRIS</h1>
+    <input id="level-choice" placeholder="KIERY LEWER JERONIE" type="number">
+    <button id="start-btn">ZACZYNOMY</button>
   </div>
-  <canvas id="tetris" width="240" height="400"></canvas>
+  <div class="game">
+    <div class="numbers">
+      <span id="score"></span>
+      <span id="number-of-lines"></span>
+      <span id="level"></span>
+    </div>
+    <canvas id="tetris" width="240" height="400"></canvas>
+  </div>
+  <div class="game-over">
+    <h1>PRZESRAŁEŚ</h1>
+    <button id="restart-btn">Rozpocząć ponownie?</button>
+  </div>
   <script src="tetris.js"></script>
   <embed src="audio/Tetris.ogg" autostart="true" loop="true"
   width="2" height="0">

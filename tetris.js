@@ -3,10 +3,11 @@ const context = canvas.getContext('2d');
 
 let dropCounter = 0;
 let dropInterval = 1000;
-
 let lastTime = 0;
 
 let scoreCounter = 0;
+
+let gameState = 'start';
 
 context.scale(20, 20);
 
@@ -123,7 +124,7 @@ function drawMatrix(matrix, offset) {
 
 function increaseLevel() {
   if (scoreCounter === 100) {
-    dropInterval /= 2;
+    dropInterval /= 1.5;
     player.level++;
     scoreCounter = 0;
   }
@@ -168,6 +169,8 @@ function playerReset() {
   player.pos.x = (arena[0].length / 2 | 0) -
                  (player.matrix[0].length / 2 | 0);
   if (collide(arena, player)) {
+    gameState = 'gameOver';
+    showGameOverScreen();
     arena.forEach(row => row.fill(0));
     player.score = 0;
     player.lines = 0;
@@ -217,16 +220,20 @@ function rotate(matrix, dir) {
 
 
 function update(time = 0) {
-  const deltaTime = time - lastTime;
-  lastTime = time;
+  if (gameState !== 'game') {
+    return;
+  } else {
+    const deltaTime = time - lastTime;
+    lastTime = time;
 
-  dropCounter += deltaTime;
-  if (dropCounter > dropInterval) {
-    playerDrop();
+    dropCounter += deltaTime;
+    if (dropCounter > dropInterval) {
+      playerDrop();
+    }
+
+    draw();
+    requestAnimationFrame(update);
   }
-
-  draw();
-  requestAnimationFrame(update);
 }
 
 function updateLevel() {
@@ -276,8 +283,43 @@ document.addEventListener('keydown', event => {
   }
 });
 
-playerReset();
-updateNumberOfLines();
-updateScore();
-updateLevel();
-update();
+document.getElementById('start-btn').addEventListener('click', startGame);
+document.getElementById('restart-btn').addEventListener('click', showStartScreen);
+
+function showStartScreen() {
+    document.querySelector('.game-over').classList.remove('active');
+    document.querySelector('.start').classList.add('active');
+}
+
+function showGameOverScreen() {
+  if (gameState !== 'gameOver') {
+    return;
+  } else {
+    gameState = 'game-over'
+    document.querySelector('.game').classList.remove('active');
+    document.querySelector('.game-over').classList.add('active');
+  }
+}
+
+function setLevel() {
+  player.level = document.getElementById('level-choice').value;
+  if (player.level === 1) {
+    return;
+  } else {
+    dropInterval = 1000 / (player.level)
+  }
+}
+
+function startGame() {
+  gameState = 'game';
+  document.querySelector('.start').classList.remove('active');
+  document.querySelector('.game').classList.add('active');
+  setLevel();
+  playerReset();
+  updateNumberOfLines();
+  updateScore();
+  updateLevel();
+  update();
+}
+
+showStartScreen();

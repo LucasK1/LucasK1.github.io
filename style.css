@@ -1,0 +1,26 @@
+body {
+  background-image: url('images/tetris_0.jpg');
+  color: #fff;
+  font-family: sans-serif;
+  font-size: 2em;
+  text-align: center;
+}
+canvas {
+  border: solid .2em #fff;
+  height: 90vh;
+}
+.numbers {
+  height: 5vh;
+}
+#score, #number-of-lines, #level {
+  border: solid .1em #fff;
+  padding: .2em;
+  margin: .1em;
+}
+
+.game, .start, .game-over {
+  display: none;
+}
+.active {
+  display: block;
+}
